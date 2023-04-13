@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../context";
 import Axios from "../../config/Api";
+import MenuSuperior from "../../components/NavBar";
 
 export default function InicioDemanda() {
   const { infoDemanda, setInfoDemanda, numId, setNumId } =
@@ -65,8 +66,14 @@ export default function InicioDemanda() {
     }
   }, []);
 
+  async function deslogar() {
+    sessionStorage.clear();
+    navigate("/");
+  }
+
   return (
     <div>
+      <MenuSuperior botao2={"Sair"} finalizar={() => deslogar()} />
       <div
         style={{
           margin: "2%",

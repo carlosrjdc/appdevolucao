@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../../context";
 import { useNavigate } from "react-router-dom";
 import Axios from "../../config/Api";
+import MenuSuperior from "../../components/NavBar";
 
 export function EditarConferenciaFisicaLista() {
   const { numId, itemEditar, setItemEditar } = useContext(GlobalContext);
@@ -23,6 +24,13 @@ export function EditarConferenciaFisicaLista() {
 
   return (
     <div>
+      <MenuSuperior
+        botao1={"Voltar"}
+        voltar={() => {
+          navigate("/finalizarconferencia");
+        }}
+      />
+      <br></br>
       {listagemItens.map((item) => (
         <div
           style={{
@@ -30,6 +38,7 @@ export function EditarConferenciaFisicaLista() {
             margin: "0.5%",
             background: "#ccecf4",
             fontWeight: "bold",
+            fontSize: "15px",
           }}
           key={item.id}
           onClick={() => {

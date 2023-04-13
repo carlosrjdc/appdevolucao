@@ -22,7 +22,16 @@ export default function FinalizarConferencia() {
 
   return (
     <div>
-      <MenuSuperior />
+      <MenuSuperior
+        botao1={"Voltar"}
+        botao2={"Finalizar"}
+        voltar={() => {
+          navigate("/listaconferencia");
+        }}
+        finalizar={() => {
+          navigate("/fecharconferencia");
+        }}
+      />
       <div
         style={{
           padding: "2%",

@@ -29,11 +29,19 @@ export default function ListaConferencia() {
 
   return (
     <div>
-      <MenuSuperior voltar={() => Voltar()} />
+      <MenuSuperior
+        botao1={"Voltar"}
+        botao2={"Ver Divergencia"}
+        voltar={() => Voltar()}
+        finalizar={() => {
+          navigate("/finalizarconferencia");
+        }}
+      />
       <br></br>
       {dadosConferencia.map((item) => (
         <div
           style={{
+            fontWeight: "bold",
             padding: "4%",
             margin: "1%",
             background: "#ccecf4",
@@ -45,7 +53,7 @@ export default function ListaConferencia() {
           }}
         >
           <div>Item: {item.produto}</div>
-          <div>Descrição: {item?.materiais?.descricao}</div>
+          <div>{item.descricao}</div>
           <div>Quantidade Conferida: {item.fisico}</div>
         </div>
       ))}

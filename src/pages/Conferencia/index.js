@@ -47,6 +47,8 @@ export default function Conferencia() {
   return (
     <div style={{ textAlign: "center" }}>
       <MenuSuperior
+        botao1={"Voltar"}
+        botao2={"Ver Divergencia"}
         voltar={() => {
           navigate("/listaconferencia");
         }}
@@ -89,6 +91,7 @@ export default function Conferencia() {
         </div>
         <div style={{ marginTop: "0.5%", padding: "2%" }}>
           <TextField
+            type="date"
             fullWidth
             id="outlined-basic"
             label="Fabricação"

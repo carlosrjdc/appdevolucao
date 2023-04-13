@@ -10,6 +10,7 @@ import {
 } from "../pages/ListaEditar/index.js";
 import EditarFinal from "../pages/EditarFinal/index.js";
 import AddManual from "../pages/AddManual/index.js";
+import FecharSeparacao from "../pages/FecharConferencia/index.js";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
   {
     path: "/addmanual",
     element: <AddManual />,
+  },
+  {
+    path: "/fecharconferencia",
+    element: <FecharSeparacao />,
   },
 ]);
 

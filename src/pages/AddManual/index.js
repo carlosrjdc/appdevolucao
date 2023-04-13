@@ -50,6 +50,7 @@ export default function AddManual() {
         setQuantidade("");
         setSku("");
         setProduto("");
+        navigate("/listaconferencia");
       })
       .catch((erro) => {
         console.log(erro);
@@ -58,7 +59,7 @@ export default function AddManual() {
 
   return (
     <div>
-      <MenuSuperior voltar={() => Voltar()} />
+      <MenuSuperior botao1={"Voltar"} voltar={() => Voltar()} />
       <br></br>
 
       <div

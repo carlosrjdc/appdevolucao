@@ -7,6 +7,7 @@ import Axios from "../../config/Api.js";
 const LoginPage = () => {
   const [usuario, setUsuario] = useState("");
   const [password, setPassword] = useState("");
+  const [estadoLogin, setEstadoLogin] = useState("");
   const { isLoggedIn, setIsLoggedIn, isUser, setIsUser } =
     useContext(GlobalContext);
   const navigate = useNavigate();
@@ -26,11 +27,11 @@ const LoginPage = () => {
           sessionStorage.setItem("id", response.data.iduser);
           navigate("/iniciodemanda");
         } else {
-          console.log("Senha ou Usuario incorreto.");
+          setEstadoLogin("Senha ou Usuario incorreto.");
         }
       })
       .catch((erro) => {
-        console.log(erro);
+        setEstadoLogin("Senha ou Usuario incorreto.");
       });
   };
 
@@ -54,6 +55,13 @@ const LoginPage = () => {
         />
         <button type="submit">Entrar</button>
       </form>
+      <br></br>
+      <br></br>
+      <div style={{ fontWeight: "bold", color: "red", fontSize: "18px" }}>
+        {estadoLogin === "Senha ou Usuario incorreto." ? (
+          <div>"Senha ou Usuario incorreto."</div>
+        ) : null}
+      </div>
     </div>
   );
 };
