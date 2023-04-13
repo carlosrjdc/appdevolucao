@@ -26,10 +26,12 @@ export default function Conferencia() {
       lote: fabricacao,
     })
       .then((response) => {
+        setMaterial("");
         setSif("");
         setFabricacao("");
         setQtd("");
         setValidado(true);
+        navigate("/listaconferencia");
       })
       .catch((erro) => console.log(erro));
   }
