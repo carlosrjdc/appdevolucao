@@ -49,7 +49,7 @@ export default function ListaConferencia() {
           <div>Quantidade Conferida: {item.fisico}</div>
         </div>
       ))}
-      <div>
+      <div onClick={() => navigate("/addmanual")}>
         <AddAppBar />
       </div>
     </div>
