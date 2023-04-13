@@ -52,6 +52,8 @@ export default function AddManual() {
   return (
     <div>
       <MenuSuperior voltar={() => Voltar()} />
+      <br></br>
+      {descricao}
       <div style={{ padding: "2%", margin: "0.2%" }}>
         <TextField
           type="number"
