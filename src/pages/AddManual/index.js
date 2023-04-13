@@ -1,11 +1,15 @@
 import TextField from "@mui/material/TextField";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import MenuSuperior from "../../components/NavBar";
+import Axios from "../../config/Api";
+import { GlobalContext } from "../../context";
 
 export default function AddManual() {
+  const { numId } = useContext(GlobalContext);
   const [produto, setProduto] = useState("");
+  const [descricao, setDescricao] = useState("");
   const [sku, setSku] = useState("");
   const [sif, setSif] = useState("");
   const [fabricacao, setFabricacao] = useState("");
@@ -15,6 +19,34 @@ export default function AddManual() {
 
   function Voltar() {
     navigate("/listaconferencia");
+  }
+
+  async function buscarProduto() {
+    Axios.get(`/buscarmaterial/${produto}`).then((response) => {
+      setSku(response.data.id);
+      setDescricao(response.data.descricao);
+    });
+  }
+
+  async function cadastrarProduto() {
+    Axios.post(`/conferencia/addproduto/${numId}`, {
+      produto: sku,
+      quantidade: quantidade,
+      sif: sif,
+      lote: fabricacao,
+    })
+      .then((response) => {
+        setSif("");
+        setFabricacao("");
+        setQuantidade("");
+        setSku("");
+        setProduto("");
+      })
+      .catch((erro) => {
+        setSku("");
+        setProduto("");
+        setDescricao("Não localizado!");
+      });
   }
 
   return (
@@ -29,6 +61,9 @@ export default function AddManual() {
           variant="outlined"
           value={produto}
           onChange={(e) => setProduto(e.target.value)}
+          onBlur={() => {
+            buscarProduto();
+          }}
         />
       </div>
       <div style={{ padding: "2%", margin: "0.2%" }}>
@@ -67,7 +102,12 @@ export default function AddManual() {
       <br></br>
       <br></br>
       <div style={{ padding: "10%" }}>
-        <Button variant="contained" size="small">
+        <Button
+          disabled={sku === ""}
+          onClick={cadastrarProduto}
+          variant="contained"
+          size="small"
+        >
           INSERIR
         </Button>
       </div>
