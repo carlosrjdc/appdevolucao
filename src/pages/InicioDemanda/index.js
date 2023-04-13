@@ -87,6 +87,7 @@ export default function InicioDemanda() {
         <div style={{ margin: "2%", padding: "4%" }}>INFORME O ID:</div>
         <TextField
           fullWidth
+          type="number"
           id="outlined-basic"
           label="ID"
           variant="outlined"
@@ -115,6 +116,7 @@ export default function InicioDemanda() {
               <br></br>
               <TextField
                 fullWidth
+                type="number"
                 id="outlined-basic"
                 label="DOCA"
                 variant="outlined"
