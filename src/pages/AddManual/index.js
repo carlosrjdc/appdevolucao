@@ -1,5 +1,6 @@
 import TextField from "@mui/material/TextField";
 import { useNavigate } from "react-router-dom";
+import InputMask from "react-input-mask";
 import Button from "@mui/material/Button";
 import { useContext, useState } from "react";
 import MenuSuperior from "../../components/NavBar";
@@ -14,6 +15,7 @@ export default function AddManual() {
   const [sif, setSif] = useState("");
   const [fabricacao, setFabricacao] = useState("");
   const [quantidade, setQuantidade] = useState("");
+  const [telefone, setTelefone] = useState("");
 
   const navigate = useNavigate();
 
@@ -55,11 +57,37 @@ export default function AddManual() {
       });
   }
 
+  const handleDataChange = (event) => {
+    setFabricacao(event.target.value);
+  };
+
+  const isValidDate = (dateString) => {
+    const regex = /^\d{2}\/\d{2}\/\d{4}$/;
+    if (!regex.test(dateString)) return false;
+
+    const [dd, mm, yyyy] = dateString.split("/");
+    const date = new Date(`${yyyy}-${mm}-${dd}`);
+    return !isNaN(date.getTime());
+  };
+
+  const isDateValid = isValidDate(fabricacao);
+  console.log(fabricacao.length);
   return (
     <div>
       <MenuSuperior voltar={() => Voltar()} />
       <br></br>
-      {descricao}
+
+      <div
+        style={{
+          padding: "2%",
+          textAlign: "center",
+          marginBottom: "4%",
+          fontWeight: "bold",
+          fontSize: "18px",
+        }}
+      >
+        {descricao}
+      </div>
       <div style={{ padding: "2%", margin: "0.2%" }}>
         <TextField
           type="number"
@@ -86,15 +114,21 @@ export default function AddManual() {
         />
       </div>
       <div style={{ padding: "2%", margin: "0.2%" }}>
-        <TextField
-          type="date"
-          fullWidth
-          id="outlined-basic"
-          label="Data Fabricação"
-          variant="outlined"
+        <InputMask
+          mask="99/99/9999"
           value={fabricacao}
-          onChange={(e) => setFabricacao(e.target.value)}
-        />
+          onChange={handleDataChange}
+        >
+          {() => (
+            <TextField
+              label="Fabricação"
+              fullWidth
+              variant="outlined"
+              error={!isDateValid} // Define o estado de erro do TextField com base na validação da data
+              helperText={!isDateValid ? "Data inválida" : ""} // Define a mensagem de erro quando a data é inválida
+            />
+          )}
+        </InputMask>
       </div>
       <div style={{ padding: "2%", margin: "0.2%" }}>
         <TextField
