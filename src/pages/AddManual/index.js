@@ -22,10 +22,18 @@ export default function AddManual() {
   }
 
   async function buscarProduto() {
-    Axios.get(`/buscarmaterial/${produto}`).then((response) => {
-      setSku(response.data.id);
-      setDescricao(response.data.descricao);
-    });
+    Axios.get(`/buscarmaterial/${produto}`)
+      .then((response) => {
+        if (response.data) {
+          setSku(response.data.id);
+          setDescricao(response.data.descricao);
+        } else {
+          setDescricao("Não localizado");
+        }
+      })
+      .catch((erro) => {
+        setDescricao("Não localizado");
+      });
   }
 
   async function cadastrarProduto() {
@@ -43,9 +51,7 @@ export default function AddManual() {
         setProduto("");
       })
       .catch((erro) => {
-        setSku("");
-        setProduto("");
-        setDescricao("Não localizado!");
+        console.log(erro);
       });
   }
 
