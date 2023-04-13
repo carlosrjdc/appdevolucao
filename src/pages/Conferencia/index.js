@@ -71,6 +71,7 @@ export default function Conferencia() {
         <div style={{ marginTop: "0.5%", padding: "2%" }}>
           <TextField
             fullWidth
+            type="number"
             id="outlined-basic"
             label="Material"
             variant="outlined"
@@ -82,6 +83,7 @@ export default function Conferencia() {
         <div style={{ marginTop: "0.5%", padding: "2%" }}>
           <TextField
             fullWidth
+            type="number"
             id="outlined-basic"
             label="SIF"
             variant="outlined"
@@ -103,6 +105,7 @@ export default function Conferencia() {
         <div style={{ marginTop: "0.5%", padding: "2%" }}>
           <TextField
             fullWidth
+            type="number"
             id="outlined-basic"
             label="Quantidade"
             variant="outlined"
