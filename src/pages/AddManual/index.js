@@ -64,6 +64,8 @@ export default function AddManual() {
       });
   }
 
+  console.log(qtdAvaria);
+
   return (
     <div>
       <MenuSuperior botao1={"Voltar"} voltar={() => Voltar()} />
@@ -133,7 +135,12 @@ export default function AddManual() {
           control={
             <Checkbox
               label={"teste"}
-              onChange={(e) => setSelecionado(e.target.checked)}
+              onChange={(e) => {
+                setSelecionado(e.target.checked);
+                if (!e.target.checked) {
+                  setQtdAvaria(0);
+                }
+              }}
             />
           }
         />
