@@ -1,5 +1,7 @@
 import TextField from "@mui/material/TextField";
 import { useNavigate } from "react-router-dom";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import InputMask from "react-input-mask";
 import Button from "@mui/material/Button";
 import { useContext, useState } from "react";
@@ -15,6 +17,8 @@ export default function AddManual() {
   const [sif, setSif] = useState("");
   const [fabricacao, setFabricacao] = useState("");
   const [quantidade, setQuantidade] = useState("");
+  const [qtdAvaria, setQtdAvaria] = useState(0);
+  const [selecionado, setSelecionado] = useState(false);
 
   const navigate = useNavigate();
 
@@ -43,6 +47,7 @@ export default function AddManual() {
       quantidade: quantidade,
       sif: sif,
       lote: fabricacao,
+      quantidadeAvaria: qtdAvaria,
     })
       .then((response) => {
         setSif("");
@@ -50,6 +55,8 @@ export default function AddManual() {
         setQuantidade("");
         setSku("");
         setProduto("");
+        setQtdAvaria(0);
+        setSelecionado(false);
         navigate("/listaconferencia");
       })
       .catch((erro) => {
@@ -119,8 +126,30 @@ export default function AddManual() {
           value={quantidade}
           onChange={(e) => setQuantidade(e.target.value)}
         />
+        <br></br>
+        <br></br>
+        <FormControlLabel
+          label="Avaria?"
+          control={
+            <Checkbox
+              label={"teste"}
+              onChange={(e) => setSelecionado(e.target.checked)}
+            />
+          }
+        />
+        {selecionado ? (
+          <TextField
+            type="number"
+            fullWidth
+            id="outlined-basic"
+            label="Qtd avariada"
+            variant="outlined"
+            value={qtdAvaria}
+            onChange={(e) => setQtdAvaria(e.target.value)}
+          />
+        ) : null}
       </div>
-      <br></br>
+
       <br></br>
       <div style={{ padding: "10%" }}>
         <Button

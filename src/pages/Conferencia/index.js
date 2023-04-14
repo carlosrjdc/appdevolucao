@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
 import { GlobalContext } from "../../context";
 import { useNavigate } from "react-router-dom";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Axios from "../../config/Api";
@@ -17,6 +19,8 @@ export default function Conferencia() {
   const [fabricacao, setFabricacao] = useState("");
   const [qtd, setQtd] = useState("");
   const [validado, setValidado] = useState(true);
+  const [qtdAvaria, setQtdAvaria] = useState(0);
+  const [selecionado, setSelecionado] = useState(false);
 
   async function cadastrarProduto() {
     Axios.post(`/conferencia/addproduto/${numId}`, {
@@ -24,6 +28,7 @@ export default function Conferencia() {
       quantidade: qtd,
       sif: sif,
       lote: fabricacao,
+      quantidadeAvaria: qtdAvaria,
     })
       .then((response) => {
         setMaterial("");
@@ -31,6 +36,8 @@ export default function Conferencia() {
         setFabricacao("");
         setQtd("");
         setValidado(true);
+        setSelecionado(false);
+        setQtdAvaria(0);
         navigate("/listaconferencia");
       })
       .catch((erro) => console.log(erro));
@@ -114,6 +121,27 @@ export default function Conferencia() {
             value={qtd}
             onChange={(e) => setQtd(e.target.value)}
           />
+          <FormControlLabel
+            label="Avaria?"
+            control={
+              <Checkbox
+                label={"teste"}
+                value={selecionado}
+                onChange={(e) => setSelecionado(e.target.checked)}
+              />
+            }
+          />
+          {selecionado ? (
+            <TextField
+              type="number"
+              fullWidth
+              id="outlined-basic"
+              label="Qtd avariada"
+              variant="outlined"
+              value={qtdAvaria}
+              onChange={(e) => setQtdAvaria(e.target.value)}
+            />
+          ) : null}
         </div>
         <br></br>
         <br></br>
