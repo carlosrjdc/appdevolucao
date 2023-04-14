@@ -34,13 +34,11 @@ export default function FinalizarConferencia() {
       />
       <div
         style={{
-          padding: "2%",
-          marginTop: "2%",
+          padding: "0.5%",
+          marginTop: "0.1%",
           textAlign: "center",
         }}
-      >
-        <BiEditAlt onClick={() => navigate("/editarConferencia")} size={35} />
-      </div>
+      ></div>
       {dadosresultado.map((item) => (
         <div
           style={{

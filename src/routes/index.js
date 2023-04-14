@@ -1,7 +1,7 @@
 import { createBrowserRouter, Link } from "react-router-dom";
 import Autenticar from "../pages/Login/Login.js";
 import InicioDemanda from "../pages/InicioDemanda/index.js";
-import ListaConferencia from "../pages/ListaConferencia/index.js";
+import ListaConferencia from "../pages/ListaConferencia/Reentrega.js";
 import Conferencia from "../pages/Conferencia/index.js";
 import FinalizarConferencia from "../pages/Finalizar/index.js";
 import {
@@ -11,6 +11,8 @@ import {
 import EditarFinal from "../pages/EditarFinal/index.js";
 import AddManual from "../pages/AddManual/index.js";
 import FecharSeparacao from "../pages/FecharConferencia/index.js";
+import TabPanel from "../pages/ListaConferencia/Tabela.js";
+import BasicTabs from "../pages/ListaConferencia/Tabela.js";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +25,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/listaconferencia",
-    element: <ListaConferencia />,
+    element: <BasicTabs />,
   },
   {
     path: "/conferencia",

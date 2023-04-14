@@ -24,12 +24,6 @@ export function EditarConferenciaFisicaLista() {
 
   return (
     <div>
-      <MenuSuperior
-        botao1={"Voltar"}
-        voltar={() => {
-          navigate("/finalizarconferencia");
-        }}
-      />
       <br></br>
       {listagemItens.map((item) => (
         <div

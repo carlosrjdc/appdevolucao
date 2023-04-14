@@ -38,7 +38,7 @@ export default function EditarFinal() {
       <MenuSuperior
         botao1={"Voltar"}
         voltar={() => {
-          navigate("/editarConferencia");
+          navigate("/listaconferencia");
         }}
       />
 

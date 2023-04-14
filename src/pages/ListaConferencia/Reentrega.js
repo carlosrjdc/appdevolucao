@@ -5,15 +5,17 @@ import { GlobalContext } from "../../context";
 import MenuSuperior from "../../components/NavBar";
 import AddAppBar from "../../components/AddAppBar";
 
-export default function ListaConferencia() {
+export default function ListaConferenciaReentrega() {
   const [dadosConferencia, setDadosConferencia] = useState([]);
   const { dadosSelecionado, setDadosSelecionado, numId } =
     useContext(GlobalContext);
   const navigate = useNavigate();
 
   useEffect(() => {
-    Axios.get(`/conferencia/resultadoconferencia/${numId}`).then((response) => {
-      setDadosConferencia(response.data);
+    Axios.get(`/conferencia/retornoreentrega/${numId}`).then((response) => {
+      setDadosConferencia(
+        response.data.filter((filtrar) => filtrar.motivo === "Reentrega")
+      );
     });
   }, []);
 
@@ -23,21 +25,8 @@ export default function ListaConferencia() {
     navigate("/conferencia");
   }
 
-  function Voltar() {
-    navigate("/iniciodemanda");
-  }
-
   return (
     <div>
-      <MenuSuperior
-        botao1={"Voltar"}
-        botao2={"Ver Divergencia"}
-        voltar={() => Voltar()}
-        finalizar={() => {
-          navigate("/finalizarconferencia");
-        }}
-      />
-      <br></br>
       {dadosConferencia.map((item) => (
         <div
           style={{
@@ -54,12 +43,18 @@ export default function ListaConferencia() {
         >
           <div>Item: {item.produto}</div>
           <div>{item.descricao}</div>
-          <div>Quantidade Conferida: {item.fisico}</div>
+          <div>Quantidade: {item.quantidade}</div>
         </div>
       ))}
       <div onClick={() => navigate("/addmanual")}>
         <AddAppBar />
       </div>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
     </div>
   );
 }
