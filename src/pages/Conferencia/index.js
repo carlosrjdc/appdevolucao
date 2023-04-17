@@ -9,8 +9,14 @@ import Axios from "../../config/Api";
 import MenuSuperior from "../../components/NavBar";
 
 export default function Conferencia() {
-  const { dadosSelecionado, setDadosSelecionado, infoDemanda, numId } =
-    useContext(GlobalContext);
+  const {
+    dadosSelecionado,
+    setDadosSelecionado,
+    infoDemanda,
+    numId,
+    dadosConferencia,
+    setDadosConferencia,
+  } = useContext(GlobalContext);
 
   const navigate = useNavigate();
 
@@ -38,6 +44,11 @@ export default function Conferencia() {
         setValidado(true);
         setSelecionado(false);
         setQtdAvaria(0);
+        setDadosConferencia(
+          dadosConferencia.filter(
+            (filtrar) => filtrar.id !== dadosSelecionado.id
+          )
+        );
         navigate("/listaconferencia");
       })
       .catch((erro) => console.log(erro));

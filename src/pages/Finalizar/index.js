@@ -15,7 +15,9 @@ export default function FinalizarConferencia() {
   useEffect(() => {
     Axios.get(`conferencia/resultadoconferencia/${numId}`)
       .then((response) => {
-        setDadosResultado(response.data);
+        setDadosResultado(
+          response.data.filter((filtrar) => filtrar.diferenca !== 0)
+        );
       })
       .catch((erro) => console.log(erro));
   }, []);
@@ -51,25 +53,6 @@ export default function FinalizarConferencia() {
         >
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <div>{item.produto} </div>
-            <div>
-              {item.diferenca > 0 ? (
-                <div
-                  style={{
-                    color: "green",
-                    fontWeight: "bold",
-                    fontSize: "20px",
-                  }}
-                >
-                  Sobra: {item.diferenca}
-                </div>
-              ) : (
-                <div
-                  style={{ color: "red", fontWeight: "bold", fontSize: "20px" }}
-                >
-                  Falta: {item.diferenca}
-                </div>
-              )}
-            </div>
           </div>
           <div>{item.descricao} </div>
           <div
@@ -79,7 +62,6 @@ export default function FinalizarConferencia() {
               marginTop: "1%",
             }}
           >
-            <div>CONTABIL: {item.contabil} </div>
             <div>FISICO: {item.fisico} </div>
           </div>
         </div>

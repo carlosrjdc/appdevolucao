@@ -9,6 +9,9 @@ export function InfoProvider({ children }) {
   const [infoDemanda, setInfoDemanda] = useState([]);
   const [itemEditar, setItemEditar] = useState({});
   const [numId, setNumId] = useState("");
+  const [dadosConferencia, setDadosConferencia] = useState([]);
+  const [idSelecionado, setIdSelecionado] = useState("");
+  const [idTabela, setIdTabela] = useState("reentrega");
 
   return (
     <GlobalContext.Provider
@@ -25,6 +28,12 @@ export function InfoProvider({ children }) {
         setNumId,
         itemEditar,
         setItemEditar,
+        dadosConferencia,
+        setDadosConferencia,
+        idSelecionado,
+        setIdSelecionado,
+        idTabela,
+        setIdTabela,
       }}
     >
       {children}

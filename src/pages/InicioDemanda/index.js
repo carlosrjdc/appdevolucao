@@ -7,8 +7,14 @@ import Axios from "../../config/Api";
 import MenuSuperior from "../../components/NavBar";
 
 export default function InicioDemanda() {
-  const { infoDemanda, setInfoDemanda, numId, setNumId } =
-    useContext(GlobalContext);
+  const {
+    infoDemanda,
+    setInfoDemanda,
+    numId,
+    setNumId,
+    dadosConferencia,
+    setDadosConferencia,
+  } = useContext(GlobalContext);
 
   const [doca, setDoca] = useState("");
   const [demandasEmAberto, setDemandasEmAberto] = useState([]);
@@ -44,7 +50,12 @@ export default function InicioDemanda() {
         doca: doca,
         idconferente: identificador,
       })
-        .then((response) => {
+        .then(async (response) => {
+          await Axios.get(`/conferencia/retornoreentrega/${numId}`).then(
+            (response) => {
+              setDadosConferencia(response.data);
+            }
+          );
           navigate("/listaconferencia");
         })
         .catch((erro) => {
@@ -154,7 +165,12 @@ export default function InicioDemanda() {
                     fontSize: "16px",
                   }}
                   key={item.id}
-                  onClick={() => {
+                  onClick={async () => {
+                    await Axios.get(
+                      `/conferencia/retornoreentrega/${item.id}`
+                    ).then((response) => {
+                      setDadosConferencia(response.data);
+                    });
                     setNumId(item.id);
                     navigate("/listaconferencia");
                   }}

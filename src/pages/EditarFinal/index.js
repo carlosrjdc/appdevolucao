@@ -7,6 +7,7 @@ import { BiEditAlt } from "react-icons/bi";
 import { BsTrash } from "react-icons/bs";
 import Axios from "../../config/Api";
 import MenuSuperior from "../../components/NavBar";
+import Notificar from "../../components/Notificar";
 
 export default function EditarFinal() {
   const { itemEditar } = useContext(GlobalContext);
@@ -24,11 +25,27 @@ export default function EditarFinal() {
         fabricacao,
         quantidade,
       })
-        .then((response) => console.log(response.data))
+        .then((response) => {
+          Notificar(
+            "Sucesso",
+            "Registro Editado com sucesso",
+            "success",
+            "bottom"
+          );
+          navigate("/listaconferencia");
+        })
         .catch((erro) => console.log(erro));
     } else if (confirmaracao === "excluir") {
       Axios.delete(`/excluirconferencia/${itemEditar.id}`)
-        .then((response) => console.log(response.data))
+        .then((response) => {
+          Notificar(
+            "Sucesso",
+            "Registro Excluido com sucesso",
+            "success",
+            "bottom"
+          );
+          navigate("/listaconferencia");
+        })
         .catch((erro) => console.log(erro));
     }
   }

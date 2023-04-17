@@ -5,8 +5,11 @@ import ListaConferenciaReentrega from "./Reentrega";
 import ListaConferenciaDevolucao from "./Devolucao";
 import MenuSuperior from "../../components/NavBar";
 import { EditarConferenciaFisicaLista } from "../ListaEditar";
+import { useContext } from "react";
+import { GlobalContext } from "../../context";
 
 function UncontrolledExample() {
+  const { idTabela, setIdTabela } = useContext(GlobalContext);
   const navigate = useNavigate();
   return (
     <div>
@@ -22,7 +25,7 @@ function UncontrolledExample() {
       </div>
 
       <Tabs
-        defaultActiveKey="reentrega"
+        defaultActiveKey={idTabela}
         id="uncontrolled-tab-example"
         className="mb-3"
         fill

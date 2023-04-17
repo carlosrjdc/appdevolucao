@@ -6,29 +6,33 @@ import MenuSuperior from "../../components/NavBar";
 import AddAppBar from "../../components/AddAppBar";
 
 export default function ListaConferenciaDevolucao() {
-  const [dadosConferencia, setDadosConferencia] = useState([]);
-  const { dadosSelecionado, setDadosSelecionado, numId } =
-    useContext(GlobalContext);
+  const {
+    dadosSelecionado,
+    setDadosSelecionado,
+    numId,
+    dadosConferencia,
+    setDadosConferencia,
+    idSelecionado,
+    setIdSelecionado,
+    setIdTabela,
+  } = useContext(GlobalContext);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    Axios.get(`/conferencia/retornoreentrega/${numId}`).then((response) => {
-      setDadosConferencia(
-        response.data.filter((filtrar) => filtrar.motivo === "Devolução")
-      );
-    });
-  }, []);
 
   function selecionarItem(objdados) {
     console.log(objdados);
     setDadosSelecionado(objdados);
+    setIdTabela("devolucao");
     navigate("/conferencia");
   }
+
+  const devolucao = dadosConferencia.filter(
+    (filtrar) => filtrar.motivo !== "Reentrega"
+  );
 
   return (
     <div>
       <br></br>
-      {dadosConferencia.map((item) => (
+      {devolucao?.map((item) => (
         <div
           style={{
             fontWeight: "bold",
@@ -37,13 +41,14 @@ export default function ListaConferenciaDevolucao() {
             background: "#ccecf4",
             borderRadius: "4px",
           }}
-          key={item.produto}
+          key={item.id}
           onClick={() => {
             selecionarItem(item);
           }}
         >
           <div>Item: {item.produto}</div>
           <div>{item.descricao}</div>
+          <div>{item.id}</div>
         </div>
       ))}
       <div onClick={() => navigate("/addmanual")}>

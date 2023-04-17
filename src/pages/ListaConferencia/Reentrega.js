@@ -6,28 +6,29 @@ import MenuSuperior from "../../components/NavBar";
 import AddAppBar from "../../components/AddAppBar";
 
 export default function ListaConferenciaReentrega() {
-  const [dadosConferencia, setDadosConferencia] = useState([]);
-  const { dadosSelecionado, setDadosSelecionado, numId } =
-    useContext(GlobalContext);
+  const {
+    dadosSelecionado,
+    setDadosSelecionado,
+    numId,
+    dadosConferencia,
+    setDadosConferencia,
+    setIdTabela,
+  } = useContext(GlobalContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    Axios.get(`/conferencia/retornoreentrega/${numId}`).then((response) => {
-      setDadosConferencia(
-        response.data.filter((filtrar) => filtrar.motivo === "Reentrega")
-      );
-    });
-  }, []);
-
+  const reentrega = dadosConferencia.filter(
+    (filtrar) => filtrar.motivo === "Reentrega"
+  );
   function selecionarItem(objdados) {
     console.log(objdados);
     setDadosSelecionado(objdados);
+    setIdTabela("reentrega");
     navigate("/conferencia");
   }
 
   return (
     <div>
-      {dadosConferencia.map((item) => (
+      {reentrega?.map((item) => (
         <div
           style={{
             fontWeight: "bold",

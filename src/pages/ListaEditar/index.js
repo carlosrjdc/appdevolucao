@@ -5,7 +5,8 @@ import Axios from "../../config/Api";
 import MenuSuperior from "../../components/NavBar";
 
 export function EditarConferenciaFisicaLista() {
-  const { numId, itemEditar, setItemEditar } = useContext(GlobalContext);
+  const { numId, itemEditar, setItemEditar, setIdTabela } =
+    useContext(GlobalContext);
   const [listagemItens, setListagemItens] = useState([]);
   const navigate = useNavigate();
 
@@ -19,6 +20,7 @@ export function EditarConferenciaFisicaLista() {
 
   function abrirEditarFinal(item) {
     setItemEditar(item);
+    setIdTabela("conferencia");
     navigate("/editarfinal");
   }
 
