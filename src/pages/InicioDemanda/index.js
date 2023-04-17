@@ -39,7 +39,12 @@ export default function InicioDemanda() {
         doca: doca,
         idconferente: identificador,
       })
-        .then((response) => {
+        .then(async (response) => {
+          await Axios.get(`/conferencia/retornoreentrega/${numId}`).then(
+            (response) => {
+              setDadosConferencia(response.data);
+            }
+          );
           navigate("/listaconferencia");
         })
         .catch((erro) => {
