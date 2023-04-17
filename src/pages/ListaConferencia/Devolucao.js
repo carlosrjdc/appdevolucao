@@ -48,7 +48,6 @@ export default function ListaConferenciaDevolucao() {
         >
           <div>Item: {item.produto}</div>
           <div>{item.descricao}</div>
-          <div>{item.id}</div>
         </div>
       ))}
       <div onClick={() => navigate("/addmanual")}>
