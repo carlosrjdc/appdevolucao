@@ -10,12 +10,16 @@ export default function EditarConferenciaFisicaLista() {
   const [listagemItens, setListagemItens] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    Axios.get(`conferencia/buscarlistadetodositensfisicos/${numId}`)
+  async function CarregarDadosdoBanco() {
+    await Axios.get(`conferencia/buscarlistadetodositensfisicos/${numId}`)
       .then((response) => {
         setListagemItens(response.data);
       })
       .catch((erro) => console.log(erro));
+  }
+
+  useEffect(() => {
+    CarregarDadosdoBanco();
   }, []);
 
   function abrirEditarFinal(item) {
