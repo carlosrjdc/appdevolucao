@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Axios from "../../config/Api";
 import MenuSuperior from "../../components/NavBar";
 
-export default function EditarConferenciaFisicaLista() {
-  const { numId, itemEditar, setItemEditar, setIdTabela } =
+export default function EditarConferenciaFiltrado() {
+  const { numId, itemEditar, setItemEditar, setIdTabela, idFiltrarSku } =
     useContext(GlobalContext);
   const [listagemItens, setListagemItens] = useState([]);
   const navigate = useNavigate();
@@ -13,7 +13,11 @@ export default function EditarConferenciaFisicaLista() {
   useEffect(() => {
     Axios.get(`conferencia/buscarlistadetodositensfisicos/${numId}`)
       .then((response) => {
-        setListagemItens(response.data);
+        setListagemItens(
+          response.data.filter(
+            (filtrar) => parseInt(filtrar.produto) === parseInt(idFiltrarSku)
+          )
+        );
       })
       .catch((erro) => console.log(erro));
   }, []);
@@ -24,9 +28,33 @@ export default function EditarConferenciaFisicaLista() {
     navigate("/editarfinal");
   }
 
+  // Função para somar as quantidades
+  function somarquantidade(produtos) {
+    const soma = produtos.reduce(
+      (total, produto) => total + produto.quantidade,
+      0
+    );
+    return soma;
+  }
+
   return (
     <div>
-      <br></br>
+      <MenuSuperior
+        botao1={"Voltar"}
+        voltar={() => navigate("/listaconferencia")}
+      />
+
+      <div
+        style={{
+          fontSize: "16px",
+          fontWeight: "bold",
+          textAlign: "center",
+          padding: "2%",
+        }}
+      >
+        QUANTIDADE: {somarquantidade(listagemItens)}
+      </div>
+
       {listagemItens.map((item) => (
         <div
           style={{

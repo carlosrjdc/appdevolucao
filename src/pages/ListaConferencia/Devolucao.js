@@ -26,7 +26,7 @@ export default function ListaConferenciaDevolucao() {
   }
 
   const devolucao = dadosConferencia.filter(
-    (filtrar) => filtrar.motivo !== "Reentrega"
+    (filtrar) => filtrar.motivo !== "Reentrega" && filtrar.motivo !== null
   );
 
   return (

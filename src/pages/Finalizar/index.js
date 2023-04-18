@@ -8,7 +8,8 @@ import Axios from "../../config/Api";
 import MenuSuperior from "../../components/NavBar";
 
 export default function FinalizarConferencia() {
-  const { infoDemanda, numId } = useContext(GlobalContext);
+  const { infoDemanda, numId, idFiltrarSku, setIdFiltrarSku } =
+    useContext(GlobalContext);
   const [dadosresultado, setDadosResultado] = useState([]);
   const navigate = useNavigate();
 
@@ -21,6 +22,11 @@ export default function FinalizarConferencia() {
       })
       .catch((erro) => console.log(erro));
   }, []);
+
+  function filtrarConferenciaPorItem(id) {
+    setIdFiltrarSku(id);
+    navigate("/editarconferenciafiltrado");
+  }
 
   return (
     <div>
@@ -50,6 +56,9 @@ export default function FinalizarConferencia() {
             fontWeight: "bold",
           }}
           key={item.produto}
+          onClick={() => {
+            filtrarConferenciaPorItem(item.produto);
+          }}
         >
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <div>{item.produto} </div>

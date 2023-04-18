@@ -11,6 +11,7 @@ export function InfoProvider({ children }) {
   const [numId, setNumId] = useState("");
   const [dadosConferencia, setDadosConferencia] = useState([]);
   const [idSelecionado, setIdSelecionado] = useState("");
+  const [idFiltrarSku, setIdFiltrarSku] = useState("");
   const [idTabela, setIdTabela] = useState("reentrega");
 
   return (
@@ -34,6 +35,8 @@ export function InfoProvider({ children }) {
         setIdSelecionado,
         idTabela,
         setIdTabela,
+        idFiltrarSku,
+        setIdFiltrarSku,
       }}
     >
       {children}

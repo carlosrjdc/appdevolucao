@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import ListaConferenciaReentrega from "./Reentrega";
 import ListaConferenciaDevolucao from "./Devolucao";
 import MenuSuperior from "../../components/NavBar";
-import { EditarConferenciaFisicaLista } from "../ListaEditar";
+import EditarConferenciaFisicaLista from "../ListaEditar";
 import { useContext } from "react";
 import { GlobalContext } from "../../context";
 
