@@ -43,9 +43,9 @@ export default function InicioDemanda() {
           await Axios.get(`/conferencia/retornoreentrega/${numId}`).then(
             (response) => {
               setDadosConferencia(response.data);
+              navigate("/listaconferencia");
             }
           );
-          navigate("/listaconferencia");
         })
         .catch((erro) => {
           setInfoDemanda(null);
@@ -59,9 +59,9 @@ export default function InicioDemanda() {
           await Axios.get(`/conferencia/retornoreentrega/${numId}`).then(
             (response) => {
               setDadosConferencia(response.data);
+              navigate("/listaconferencia");
             }
           );
-          navigate("/listaconferencia");
         })
         .catch((erro) => {
           setInfoDemanda(null);
